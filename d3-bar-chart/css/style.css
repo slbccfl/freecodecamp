@@ -1,0 +1,63 @@
+.main {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: grey;
+}
+.main .container {
+  align-items: center;
+  align-self: center;
+  height: 660px;
+  width: 960px;
+  display: flex;
+  background-color: white;
+  flex-direction: column;
+  postion: relative;
+}
+
+#tooltip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  text-align: center;
+  width: 100px;
+  height: 50px;
+  padding: 2px;
+  font: 12px;
+  background: #00f2ff;
+  box-shadow: 1px 1px 10px;
+  border-radius: 2px;
+  pointer-events: none; }
+
+.overlay {
+  position: absolute;
+  background: white;
+  pointer-events: none; 
+  top: 6em; 
+}
+
+#title {
+  text-align: center;
+  font-size: 25px;
+  padding: 25px;
+  width: 910px;
+  height: 50px;
+  background-color: lightgrey;
+  border: 3px solid darkgray;
+}
+
+#chartContainer {
+  background-color: white;
+  margin: 30px;
+  position: relative;
+}
+
+
+.bar:hover {
+  fill: brown;
+}
+

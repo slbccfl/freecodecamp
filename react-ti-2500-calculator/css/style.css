@@ -1,0 +1,132 @@
+
+@import url(//db.onlinewebfonts.com/c/63f874d192fb3892d88d5e26f942b5e2?family=DS-Digital);
+@font-face {font-family: "DS-Digital";
+    src: url("//db.onlinewebfonts.com/t/63f874d192fb3892d88d5e26f942b5e2.eot");
+    src: url("//db.onlinewebfonts.com/t/63f874d192fb3892d88d5e26f942b5e2.eot?#iefix") format("embedded-opentype"),
+    url("//db.onlinewebfonts.com/t/63f874d192fb3892d88d5e26f942b5e2.woff2") format("woff2"),
+    url("//db.onlinewebfonts.com/t/63f874d192fb3892d88d5e26f942b5e2.woff") format("woff"),
+    url("//db.onlinewebfonts.com/t/63f874d192fb3892d88d5e26f942b5e2.ttf") format("truetype"),
+    url("//db.onlinewebfonts.com/t/63f874d192fb3892d88d5e26f942b5e2.svg#DS-Digital") format("svg");
+}
+#app {
+  display:flex;
+  height: 100vh;
+  width: 100vw;
+  background-color: 	#BF5700;
+}
+h1 {
+  color: #242622;
+}
+#calcInfo {
+  margin: 15px 30px;
+  padding: 15px 30px;
+}
+#calculator {
+  margin: 15px 30px;
+/*   display:flex; */
+  justify-content:center;
+/*   align-items:center; */
+  background-color: #242622;
+  border: 10px solid #E0D087;
+  border-top-width: 100px;
+  border-bottom-width: 20px;
+  border-radius: 8px;
+  width: 280px;
+  height: 460px;
+  box-shadow: 12px 12px #B6B16D;
+}
+
+#display {
+  width: 220px;
+  height: 25px;
+  padding: 10px 30px;
+  color: #e8252b;
+  background: #791400;
+  text-align: right;
+  font-size: 29px;
+  font-family: "DS-Digital";
+}
+
+#logoStrip {
+  width: 280px;
+  height: 50px;
+  background-color: #242622;
+  text-align: right;
+}
+
+#datamath {
+  position:relative;
+  top: 30px;
+  right: 20px;
+  color: #899160;
+  font: Bold 20px "Typewriter";
+}
+ 
+#key-pad {
+/*   margin: 15px 10px; */
+  top: 15px;
+  padding: 10px;
+  position:relative;
+  justify-content:center;
+  align-items:center;
+  background-color: #242622;
+  border: 2px solid black;
+  width: 256px;
+  height: 326px;
+}
+
+.operation-keys {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height: 50px;
+  width: 50px;
+  background-color: #E1D9AC;
+  color:  #242622;
+  border-radius: 2px;
+  font-family: Arial;
+  font-size: 25px;
+  box-shadow: 2px 2px #888888;
+}
+.number-keys {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height: 50px;
+  width: 50px;
+  background-color: #E9EDE5;
+  color:  #242622;
+  border-radius: 2px;
+  font-family: Arial;
+  font-size: 25px;
+  box-shadow: 2px 2px #888888;
+}
+.zero-key {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height: 50px;
+  width: 81px;
+  background-color: #E9EDE5;
+  color:  #242622;
+  border-radius: 2px;
+  font-family: Arial;
+  font-size: 25px;
+  box-shadow: 2px 2px #888888;
+}
+.equal-key {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height: 50px;
+  width: 81px;
+  background-color: #FFAA4E;
+  color:  #242622;
+  border-radius: 2px;
+  font-family: Arial;
+  font-size: 25px;
+  box-shadow: 2px 2px #888888;
+}
+td {
+  padding: 6px;
+}

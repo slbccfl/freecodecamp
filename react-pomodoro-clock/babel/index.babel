@@ -1,0 +1,211 @@
+const projectName = 'pomodoro-clock';
+localStorage.setItem('example_project', 'Pomodoro Clock');
+
+function clockify(time) {
+  let minutes = Math.floor(time / 60);
+  let seconds = time - minutes * 60;
+  seconds = seconds < 10 ? '0' + seconds : seconds;
+  minutes = minutes < 10 ? '0' + minutes : minutes;
+  return minutes + ':' + seconds;
+}
+
+class ChildComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+    }
+    this.componentDidMount = this.componentDidMount.bind(this);
+    this.componentWillUnmount = this.componentWillUnmount.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.keyPress = this.keyPress.bind(this);
+  }
+  componentDidMount() {
+    document.addEventListener('keydown', this.handleKeyPress);
+  }
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKeyPress);
+  }
+  handleKeyPress(e) {
+    if (String.fromCharCode(e.keyCode) === this.props.buttonObj.keyFace) {
+      this.keyPress();
+    }
+  }
+    
+  keyPress(e) {
+  }
+  
+  render() {
+    return (
+      <div>
+ 
+      </div>
+    )
+  }
+};
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      pomodoroLength: 25,
+      breakLength: 5,
+      timer: 25 * 60,
+      pomodoroOn: true,
+      pauseOn: false,
+      timerOn: false
+    }
+    this.method = this.method.bind(this);
+    this.reset = this.reset.bind(this);
+    this.decrementBreak = this.decrementBreak.bind(this);
+    this.incrementBreak = this.incrementBreak.bind(this);
+    this.decrementPomodoro = this.decrementPomodoro.bind(this);
+    this.incrementPomodoro = this.incrementPomodoro.bind(this);
+    this.timerControl = this.timerControl.bind(this);
+    this.startTimer = this.startTimer.bind(this);
+    this.switchTimers = this.switchTimers.bind(this);
+  }
+  
+  method() {
+  }
+  
+  reset() {
+    this.setState ({
+      pomodoroLength: 25,
+      breakLength: 5,
+      timer: 25 * 60,
+      pomodoroOn: true,
+      pauseOn: false,
+      timerOn: false,
+      intervalID: ''
+      
+    })
+    clearInterval(this.state.intervalID);
+    this.audioBeep.pause();
+    this.audioBeep.currentTime = 0;
+  }  
+  
+  decrementPomodoro() {
+    if (this.state.pomodoroLength == 1) return;
+    this.setState ({
+      timer: (this.state.pomodoroLength - 1) * 60,
+      pomodoroLength: this.state.pomodoroLength - 1
+    })
+  }  
+  
+  incrementPomodoro() {
+    if (this.state.pomodoroLength == 60) return;
+    this.setState ({
+      timer: (this.state.pomodoroLength + 1) * 60,
+      pomodoroLength: this.state.pomodoroLength + 1
+    })
+  }
+  
+  decrementBreak() {
+    if (this.state.breakLength == 1) return;
+    this.setState ({
+      breakLength: this.state.breakLength - 1
+    })
+  }  
+  
+  incrementBreak() {
+    if (this.state.breakLength == 60) return;
+    this.setState ({
+      breakLength: this.state.breakLength + 1
+    })
+  }
+  
+  
+  timerControl() {
+    if (this.state.timerOn) {
+      this.setState({timerOn: false});
+      clearInterval(this.state.intervalID);
+    } else {
+      this.startTimer();
+      this.setState({timerOn: true});
+    }
+  }
+  
+  startTimer() {
+    this.setState({
+      intervalID: setInterval(() => {
+        this.setState({timer: this.state.timer - 1});
+        this.switchTimers();
+       }, 1000)
+    })
+  }
+  
+  switchTimers() {
+    if (this.state.timer < 0) {
+      this.audioBeep.play();
+      clearInterval(this.state.intervalID);
+      if (this.state.pomodoroOn) {
+        this.setState ({
+          timer: this.state.breakLength * 60,
+          pomodoroOn: false
+        })
+      } else {
+        this.setState ({
+          timer: this.state.pomodoroLength * 60,
+          pomodoroOn: true
+        })
+      }
+      this.startTimer();
+    }
+  }
+
+  
+  render() {
+    return (
+      <div>
+        <div id='session-label'>
+          Pomodoro Length in Minutes
+        </div>
+        <div id='session-length'>
+          {this.state.pomodoroLength}
+        </div>
+        <button id='session-increment' onClick={this.incrementPomodoro}>
+          +
+        </button>
+        <button id='session-decrement'onClick={this.decrementPomodoro}>
+          -
+        </button>
+        <div id='break-label'>
+          Break Length in Minutes
+        </div>
+        <div id='break-length'>
+          {this.state.breakLength}
+        </div>
+        <button id='break-increment' onClick={this.incrementBreak}>
+          +
+        </button>
+        <button id='break-decrement' onClick={this.decrementBreak}>
+          -
+        </button>
+        <div id='timer-label'>
+          {this.state.pomodoroOn ? 'Session' : 'Break'} Time Remaining
+          <div id='time-left'>
+            {clockify(this.state.timer)}
+          </div>
+          <button id='start_stop' onClick={this.timerControl}>
+            Start/Stop
+          </button>
+          <audio
+            id="beep"
+            src="https://actions.google.com/sounds/v1/emergency/beeper_emergency_call.ogg"
+            ref={(audio) => { this.audioBeep = audio; }}
+            >
+            Your browser does not support the <code>audio</code> element.
+          </audio>
+          <button id='reset' onClick={this.reset}>
+            Reset
+          </button>
+        </div>
+      </div>
+    )
+  }
+};
+
+ReactDOM.render(
+  <App />,
+  document.getElementById('app')
+);
